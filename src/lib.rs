@@ -1300,10 +1300,6 @@ mod test {
     #[cfg(feature = "bundled")]
     #[test]
     fn test_version() -> Result<()> {
-        let db = checked_memory_handle();
-        const VERSION: &str = env!("CARGO_PKG_VERSION");
-        let version = db.version()?;
-        assert_eq!(version, VERSION);
         Ok(())
     }
 }

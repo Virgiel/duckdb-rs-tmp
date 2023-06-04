@@ -1,4 +1,4 @@
 [submodule "libduckdb-sys/duckdb-sources"]
 	path = libduckdb-sys/duckdb-sources
-	url = https://github.com/angadn/duckdb/
+	url = https://github.com/Virgiel/duckdb-tmp
     update = none

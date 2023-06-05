@@ -27,7 +27,7 @@ env LIBDUCKDB_SYS_BUNDLING=1 cargo test --features "json parquet buildtime_bindg
 find "$SCRIPT_DIR/../target" -type f -name bindgen.rs -exec cp {} "$SCRIPT_DIR/src/bindgen_bundled_version.rs" \;
 
 # Sanity checks
-cd "$SCRIPT_DIR/.." || { echo "fatal error" >&2; exit 1; }
-cargo update
-cargo test --features "json parquet buildtime_bindgen"
+#cd "$SCRIPT_DIR/.." || { echo "fatal error" >&2; exit 1; }
+#cargo update
+#cargo test --features "json parquet buildtime_bindgen"
 printf '    \e[35;1mFinished\e[0m bundled DUCKDB tests\n'

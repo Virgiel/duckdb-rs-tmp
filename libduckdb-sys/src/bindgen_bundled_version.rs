@@ -7011,6 +7011,37 @@ fn bindgen_test_layout__duckdb_arrow() {
 pub type duckdb_arrow = *mut _duckdb_arrow;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct _duckdb_arrow_stream {
+    pub __arrwstr: *mut ::std::os::raw::c_void,
+}
+#[test]
+fn bindgen_test_layout__duckdb_arrow_stream() {
+    const UNINIT: ::std::mem::MaybeUninit<_duckdb_arrow_stream> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<_duckdb_arrow_stream>(),
+        8usize,
+        concat!("Size of: ", stringify!(_duckdb_arrow_stream))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_duckdb_arrow_stream>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_duckdb_arrow_stream))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).__arrwstr) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_duckdb_arrow_stream),
+            "::",
+            stringify!(__arrwstr)
+        )
+    );
+}
+pub type duckdb_arrow_stream = *mut _duckdb_arrow_stream;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct _duckdb_config {
     pub __cnfg: *mut ::std::os::raw::c_void,
 }
@@ -7691,6 +7722,24 @@ extern "C" {
     pub fn duckdb_execute_prepared_arrow(
         prepared_statement: duckdb_prepared_statement,
         out_result: *mut duckdb_arrow,
+    ) -> duckdb_state;
+}
+extern "C" {
+    #[doc = "Scans the Arrow stream and creates a view with the given name.\n\n connection: The connection on which to execute the scan.\n table_name: Name of the temporary view to create.\n arrow: Arrow stream wrapper.\n returns: `DuckDBSuccess` on success or `DuckDBError` on failure."]
+    pub fn duckdb_arrow_scan(
+        connection: duckdb_connection,
+        table_name: *const ::std::os::raw::c_char,
+        arrow: duckdb_arrow_stream,
+    ) -> duckdb_state;
+}
+extern "C" {
+    #[doc = "Scans the Arrow array and creates a view with the given name.\n\n connection: The connection on which to execute the scan.\n table_name: Name of the temporary view to create.\n arrow_schema: Arrow schema wrapper.\n arrow_array: Arrow array wrapper.\n out_stream: Output array stream that wraps around the passed schema, for releasing/deleting once done.\n returns: `DuckDBSuccess` on success or `DuckDBError` on failure."]
+    pub fn duckdb_arrow_array_scan(
+        connection: duckdb_connection,
+        table_name: *const ::std::os::raw::c_char,
+        arrow_schema: duckdb_arrow_schema,
+        arrow_array: duckdb_arrow_array,
+        out_stream: *mut duckdb_arrow_stream,
     ) -> duckdb_state;
 }
 extern "C" {
